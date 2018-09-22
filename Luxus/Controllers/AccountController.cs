@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Luxus.Models;
+using Facebook;
 
 namespace Luxus.Controllers
 {
@@ -322,6 +323,17 @@ namespace Luxus.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+
+            var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+            var accessToken = identity.FindFirstValue("FacebookAccessToken");
+            dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
+            var facebookUserInfo = new FacebookUserInfo
+            {
+                Email = userInfo["email"],
+                FirstName = userInfo["first_name"],
+                LastName = userInfo["last_name"]
+            };
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {

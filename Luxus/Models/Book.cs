@@ -9,6 +9,7 @@ namespace Luxus.Models
     {
         public int BookID { get; set; }
         public string Title { get; set; }
+        public string Author { get; set; }
         public string Desc { get; set; }
         public Nullable<int> Rating { get; set; }
         public int Status { get; set; }
@@ -18,4 +19,6 @@ namespace Luxus.Models
         public Nullable<int> PageNo { get; set; }
         public virtual ApplicationUser User{ get; set; }
     }
+
+
 }

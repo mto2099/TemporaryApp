@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Luxus.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace Luxus
 {
@@ -55,8 +56,24 @@ namespace Luxus
             //   consumerSecret: "");
 
             //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            //   appId: "307352646693188",
+            //   appSecret: "f289b238dbc5e6324a509828b9cd2a61");
+
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions
+            {
+                AppId = "291498241681719",
+                AppSecret = "607cc2cdfa6105285854d2dd7ec34fe1",
+                Scope = { "email" },
+                Provider = new FacebookAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("FacebookAccessToken", context.AccessToken));
+                        return System.Threading.Tasks.Task.FromResult(true);
+                    }
+                }
+            });
+
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

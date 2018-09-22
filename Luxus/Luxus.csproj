@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -189,8 +192,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="DAL\DbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,6 +207,10 @@
     <Compile Include="Migrations\201809220434231_BooksRents.cs" />
     <Compile Include="Migrations\201809220434231_BooksRents.Designer.cs">
       <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809220510431_AddAuthor.cs" />
+    <Compile Include="Migrations\201809220510431_AddAuthor.Designer.cs">
+      <DependentUpon>201809220510431_AddAuthor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,6 +278,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Rent\Create.cshtml" />
+    <Content Include="Views\Rent\Delete.cshtml" />
+    <Content Include="Views\Rent\Details.cshtml" />
+    <Content Include="Views\Rent\Edit.cshtml" />
+    <Content Include="Views\Rent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809220434231_BooksRents.resx">
       <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809220510431_AddAuthor.resx">
+      <DependentUpon>201809220510431_AddAuthor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

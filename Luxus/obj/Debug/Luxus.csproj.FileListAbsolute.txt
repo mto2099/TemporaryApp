@@ -97,3 +97,7 @@ C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.p
 C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.Migrations.initial.resources
 C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.csproj.GenerateResource.Cache
 C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.Migrations.BooksRents.resources
+C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.Migrations.AddAuthor.resources
+C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\bin\Facebook.dll
+C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\bin\Facebook.xml
+C:\Users\Lux\documents\visual studio 2017\Projects\Luxus\Luxus\obj\Debug\Luxus.Migrations.FacebookUserInfo.resources
