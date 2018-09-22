@@ -194,9 +194,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809220358240_initial.cs" />
+    <Compile Include="Migrations\201809220358240_initial.Designer.cs">
+      <DependentUpon>201809220358240_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809220434231_BooksRents.cs" />
+    <Compile Include="Migrations\201809220434231_BooksRents.Designer.cs">
+      <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Rent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -275,6 +286,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809220358240_initial.resx">
+      <DependentUpon>201809220358240_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809220434231_BooksRents.resx">
+      <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
