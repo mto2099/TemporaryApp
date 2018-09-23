@@ -232,7 +232,19 @@ namespace Luxus.Controllers
             return Json("Success!");
         }
 
-
+        public ActionResult ShareControls()
+        {
+            string UserName = User.Identity.GetUserName();
+            var users = db.Users.Where(x => x.UserName != UserName).ToList();
+            List<SharedBooksVM> bol = new List<SharedBooksVM>();
+            foreach (ApplicationUser user in users) {
+                SharedBooksVM svm = new SharedBooksVM();
+                svm.User = user;
+                svm.Books = db.Books.Where(x => x.UserID == user.Id).Where(x => x.Shared == true).ToList();
+                bol.Add(svm);
+            }
+            return View(bol);
+        }
 
     }
 }

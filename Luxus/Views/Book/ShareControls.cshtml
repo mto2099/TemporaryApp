@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Luxus.ViewModels.SharedBooksVM>
+
+@{
+    ViewBag.Title = "ShareControls";
+}
+
+<h2>ShareControls</h2>
+
+@foreach (var item in Model) {
+
+    if (item.Books.Count > 0)
+    {
+    <h2>@item.User.FullName</h2>
+    <table>
+        <tr><th></th></tr>
+
+        @foreach (var book in item.Books)
+        {
+            <tr>
+                <td>
+                    @book.Title
+                </td>
+            </tr>
+        }
+    </table>
+        }
+
+    }

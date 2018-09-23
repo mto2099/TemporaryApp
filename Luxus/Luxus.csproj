@@ -283,7 +283,7 @@
     <Content Include="Views\Book\Delete.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
-    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Shared.cshtml" />
     <Content Include="Views\Rent\Create.cshtml" />
     <Content Include="Views\Rent\Delete.cshtml" />
     <Content Include="Views\Rent\Details.cshtml" />
@@ -294,6 +294,8 @@
     <Content Include="Views\Book\StatusOnGoing.cshtml" />
     <Content Include="Views\Book\MyBooks.cshtml" />
     <Content Include="Views\Book\ShareBooks.cshtml" />
+    <Content Include="Views\Book\ShareControl.cshtml" />
+    <Content Include="Views\Book\ShareControls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
