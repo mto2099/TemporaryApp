@@ -3,3 +3,5 @@
 -> Date Time Format Not working (Rent)
 
 -> Checkboxes (Sharing)
+
+-> AJAX Problem (String to Int)

@@ -218,6 +218,24 @@ namespace Luxus.Controllers
             return View(books);
         }
 
+        public JsonResult RatingControl(int BookID, int Rating)
+        {
+            //int bid = Convert.ToInt32(BookID);
+            //int rat = Convert.ToInt32(Rating);
+            //foreach (Book bo in books)
+            //{
+            //    db.Entry(bo).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+
+
+            return Json("Success!");
+        }
+
+
 
     }
 }
+
+
+
