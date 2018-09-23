@@ -220,6 +220,7 @@
     <Compile Include="Models\Rent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SharedBooksVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -292,6 +293,7 @@
     <Content Include="Views\Book\StatusToRead.cshtml" />
     <Content Include="Views\Book\StatusOnGoing.cshtml" />
     <Content Include="Views\Book\MyBooks.cshtml" />
+    <Content Include="Views\Book\ShareBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

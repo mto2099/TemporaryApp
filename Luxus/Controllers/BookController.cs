@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Luxus.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using Luxus.ViewModels;
 
 namespace Luxus.Controllers
 {
@@ -194,6 +195,27 @@ namespace Luxus.Controllers
             var userID = User.Identity.GetUserId();
             var books = db.Books.Include(b => b.User).Where(x => x.UserID == userID);
             return View(books.ToList());
+        }
+        public ActionResult ShareBooks()
+        {   
+            var userID = User.Identity.GetUserId();
+
+            var books = db.Books.Include(u => u.User).Where(u => u.UserID == userID).ToList();
+            
+            
+
+            return View(books);
+        }
+        [HttpPost]
+        public ActionResult ShareBooks(List<Book> books)
+        {
+            foreach (Book bo in books) {
+                db.Entry(bo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            
+
+            return View(books);
         }
 
 

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Luxus.Models.Book>
+
+@{
+    ViewBag.Title = "ShareBooks";
+}
+
+
+
+<h2>ShareBooks</h2>
+
+@using (Html.BeginForm("ShareBooks", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shared)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shared)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageNo)
+        </td>
+        <td>
+            @if (item.Shared == null)
+            {
+                item.Shared = false;
+            }
+            @Html.CheckBoxFor(modelItem => item.Shared.Value)
+            @*<input type="checkbox" id="@item.BookID">*@
+            @Html.LabelFor(modelItem => item.Shared, item.BookID)
+
+        </td>
+      
+        
+    </tr>
+}
+
+</table>
+
+<input type="submit" value="Share" class="btn btn-default" />
+
+}
+
+
+
+
+
+
+
+
+
+
