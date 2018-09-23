@@ -288,6 +288,10 @@
     <Content Include="Views\Rent\Details.cshtml" />
     <Content Include="Views\Rent\Edit.cshtml" />
     <Content Include="Views\Rent\Index.cshtml" />
+    <Content Include="Views\Book\StatusRead.cshtml" />
+    <Content Include="Views\Book\StatusToRead.cshtml" />
+    <Content Include="Views\Book\StatusOnGoing.cshtml" />
+    <Content Include="Views\Book\MyBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

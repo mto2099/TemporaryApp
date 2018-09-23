@@ -22,7 +22,23 @@ namespace Luxus.Controllers
             var books = db.Books.Include(b => b.User);
             return View(books.ToList());
         }
+        public ActionResult StatusRead()
+        {
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 1);
+            return View(books.ToList());
+        }
 
+        public ActionResult StatusToRead()
+        {
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 2);
+            return View(books.ToList());
+        }
+
+        public ActionResult StatusOnGoing()
+        {
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 3);
+            return View(books.ToList());
+        }
         // GET: Book/Details/5
         public ActionResult Details(int? id)
         {
@@ -106,10 +122,30 @@ namespace Luxus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookID,Title,Desc,Rating,Status,UserID,Image,Shared,PageNo")] Book book)
+        public ActionResult Edit([Bind(Include = "BookID,Title,Desc,Rating,Status,UserID,Image,Shared,PageNo")] Book book, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Upload"), _FileName);
+                        // db.Books.Add(new Book { ImageName = Path.GetFileNameWithoutExtension(file.FileName), ImagePath = _path });
+                        // db.SaveChanges();
+                        file.SaveAs(_path);
+                        book.Image = _FileName;
+                    }
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    // return View();
+                }
+                catch
+                {
+                    ViewBag.Message = "File upload failed!!";
+                    // return View();
+                }
+
                 db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -153,6 +189,13 @@ namespace Luxus.Controllers
             base.Dispose(disposing);
         }
 
-        
+        public ActionResult MyBooks()
+        {
+            var userID = User.Identity.GetUserId();
+            var books = db.Books.Include(b => b.User).Where(x => x.UserID == userID);
+            return View(books.ToList());
+        }
+
+
     }
 }

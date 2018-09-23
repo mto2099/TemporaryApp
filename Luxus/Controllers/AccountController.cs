@@ -324,16 +324,7 @@ namespace Luxus.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
 
-            var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
-            var accessToken = identity.FindFirstValue("FacebookAccessToken");
-            dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
-            var facebookUserInfo = new FacebookUserInfo
-            {
-                Email = userInfo["email"],
-                FirstName = userInfo["first_name"],
-                LastName = userInfo["last_name"]
-            };
-
+            
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
