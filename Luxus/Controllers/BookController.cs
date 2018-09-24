@@ -13,6 +13,7 @@ using Luxus.ViewModels;
 
 namespace Luxus.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -201,21 +202,34 @@ namespace Luxus.Controllers
             var userID = User.Identity.GetUserId();
 
             var books = db.Books.Include(u => u.User).Where(u => u.UserID == userID).ToList();
-            
-            
+            List<ShBookVM> bookVM = new List<ShBookVM>();
+            foreach (Book b in books)
+            {
+                bookVM.Add(new ShBookVM(b));
+            }
 
-            return View(books);
+            return View(bookVM);
         }
         [HttpPost]
-        public ActionResult ShareBooks(List<Book> books)
+        public JsonResult ShareBooks(string BookID,string action)
         {
-            foreach (Book bo in books) {
-                db.Entry(bo).State = EntityState.Modified;
+            string userId = User.Identity.GetUserId();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                int bookid = Int32.Parse(BookID);
+                Book b = db.Books.Where(x => x.UserID == userId && x.BookID == bookid).FirstOrDefault();
+                if (action == "add")
+                {
+                    b.Shared = true;
+                }
+                else
+                {
+                    b.Shared = false;
+                }
                 db.SaveChanges();
+                return Json("Success");
             }
-            
-
-            return View(books);
+            return Json("Invalid User!");
         }
 
         public JsonResult RatingControl(int BookID, int Rating)
