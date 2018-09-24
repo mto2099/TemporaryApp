@@ -24,6 +24,20 @@ namespace Luxus.Controllers
             var books = db.Books.Include(b => b.User);
             return View(books.ToList());
         }
+
+        // GET: Item
+        public ViewResult Search(string searchString)
+        {
+            var books = db.Books.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => (s.Title!=null && s.Title.Contains(searchString))
+                                       || (s.Author != null && s.Author.Contains(searchString))).ToList();
+            }
+
+            return View("Index", books);
+        }
+
         public ActionResult StatusRead()
         {
             var books = db.Books.Include(b => b.User).Where(x => x.Status == 1);
