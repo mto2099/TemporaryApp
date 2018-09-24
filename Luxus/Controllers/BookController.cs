@@ -48,6 +48,7 @@ namespace Luxus.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Book book = db.Books.Find(id);
+            ViewBag.EditAccess = (User.Identity.GetUserId() == book.UserID) ? true : false;
             if (book == null)
             {
                 return HttpNotFound();
@@ -67,7 +68,7 @@ namespace Luxus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookID,Title,Desc,Rating,Status,UserID,Image,Shared,PageNo")] Book book, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "BookID,Title,Desc,Rating,Author,Status,UserID,Image,Shared,PageNo")] Book book, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -123,30 +124,29 @@ namespace Luxus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookID,Title,Desc,Rating,Status,UserID,Image,Shared,PageNo")] Book book, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "BookID,Title,Desc,Rating,Author,Status,UserID,Image,Shared,PageNo")] Book book, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (file.ContentLength > 0)
+                    if (file.ContentLength > 0 && file.FileName != "")
                     {
                         string _FileName = Path.GetFileName(file.FileName);
                         string _path = Path.Combine(Server.MapPath("~/Upload"), _FileName);
-                        // db.Books.Add(new Book { ImageName = Path.GetFileNameWithoutExtension(file.FileName), ImagePath = _path });
-                        // db.SaveChanges();
                         file.SaveAs(_path);
                         book.Image = _FileName;
                     }
                     ViewBag.Message = "File Uploaded Successfully!!";
-                    // return View();
                 }
                 catch
                 {
                     ViewBag.Message = "File upload failed!!";
-                    // return View();
                 }
+                book.Image = book.Image;
 
+                var userID = User.Identity.GetUserId();
+                book.UserID = userID;
                 db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
