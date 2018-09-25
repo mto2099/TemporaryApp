@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    string check = "checked";
 }
 
 <h2>Index</h2>
@@ -69,7 +70,20 @@
                     @Html.DisplayFor(modelItem => item.Desc)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
+                    @*@Html.DisplayFor(modelItem => item.Rating)*@
+
+                    <span class="starRating">
+                        <input id="@item.BookID-rating5" type="radio" name="@item.BookID" class="rating" value="5" @if (item.Rating == 5) { @check } disabled>
+                        <label for="@item.BookID-rating5">5</label>
+                        <input id="@item.BookID-rating4" type="radio" name="@item.BookID" class="rating" value="4" @if (item.Rating == 4) { @check } disabled>
+                        <label for="@item.BookID-rating4">4</label>
+                        <input id="@item.BookID-rating3" type="radio" name="@item.BookID" class="rating" value="3" @if (item.Rating == 3) { @check } disabled>
+                        <label for="@item.BookID-rating3">3</label>
+                        <input id="@item.BookID-rating2" type="radio" name="@item.BookID" class="rating" value="2" @if (item.Rating == 2) { @check } disabled>
+                        <label for="@item.BookID-rating2">2</label>
+                        <input id="@item.BookID-rating1" type="radio" name="@item.BookID" class="rating" value="1" @if (item.Rating == 1) { @check } disabled>
+                        <label for="@item.BookID-rating1">1</label>
+                    </span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)

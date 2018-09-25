@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Details";
+    string check = "checked";
+    string disable = "disable";
 }
 
 <h2>Details</h2>
@@ -50,7 +52,20 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Rating)
+            @*@Html.DisplayFor(model => model.Rating)*@
+
+            <span class="starRating">
+                <input id="@Model.BookID-rating5" type="radio" name="@Model.BookID" class="rating" value="5" @if (Model.Rating == 5) { @check } @if (!ViewBag.EditAccess) { @disable }>
+                <label for="@Model.BookID-rating5">5</label>
+                <input id="@Model.BookID-rating4" type="radio" name="@Model.BookID" class="rating" value="4" @if (Model.Rating == 4) { @check } @if (!ViewBag.EditAccess) { @disable }>
+                <label for="@Model.BookID-rating4">4</label>
+                <input id="@Model.BookID-rating3" type="radio" name="@Model.BookID" class="rating" value="3" @if (Model.Rating == 3) { @check } @if (!ViewBag.EditAccess) { @disable }>
+                <label for="@Model.BookID-rating3">3</label>
+                <input id="@Model.BookID-rating2" type="radio" name="@Model.BookID" class="rating" value="2" @if (Model.Rating == 2) { @check } @if (!ViewBag.EditAccess) { @disable }>
+                <label for="@Model.BookID-rating2">2</label>
+                <input id="@Model.BookID-rating1" type="radio" name="@Model.BookID" class="rating" value="1" @if (Model.Rating == 1) { @check } @if (!ViewBag.EditAccess) { @disable }>
+                <label for="@Model.BookID-rating1">1</label>
+            </span>
         </dd>
 
         <dt>
@@ -83,6 +98,39 @@
     @if (ViewBag.EditAccess)
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) <span>|</span>
-     }
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(function () {
+
+            $('.rating').change(function () {
+                var BookID = $(this).attr("name");
+                var Rating = $(this).val();
+
+                //alert(BookID + " >> " + Rating);
+
+                $.ajax({
+                    url: "@Url.Action("Rating")",
+                    type: "POST",
+                    data: { BookID: BookID, Rating: Rating },
+                    error: function (response) {
+                        alert(response);
+                    },
+                    success: function (response) {
+                        alert(response);
+                        if (response == "Invalid User!") alert("Please Login First!");
+                        console.log(response);
+                    }
+                });
+
+            });
+        });
+    </script>
+}
+
+

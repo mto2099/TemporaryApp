@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "ShareBooks";
+    string check = "checked";
 }
 
 <h2>ShareBooks</h2>
@@ -49,6 +50,19 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
+
+                <span class="starRating">
+                    <input id="@item.BookID-rating5" type="radio" name="@item.BookID" class="rating" value="5" @if (item.Rating == 5) { @check }>
+                    <label for="@item.BookID-rating5">5</label>
+                    <input id="@item.BookID-rating4" type="radio" name="@item.BookID" class="rating" value="4" @if (item.Rating == 4) { @check }>
+                    <label for="@item.BookID-rating4">4</label>
+                    <input id="@item.BookID-rating3" type="radio" name="@item.BookID" class="rating" value="3" @if (item.Rating == 3) { @check }>
+                    <label for="@item.BookID-rating3">3</label>
+                    <input id="@item.BookID-rating2" type="radio" name="@item.BookID" class="rating" value="2" @if (item.Rating == 2) { @check }>
+                    <label for="@item.BookID-rating2">2</label>
+                    <input id="@item.BookID-rating1" type="radio" name="@item.BookID" class="rating" value="1" @if (item.Rating == 1) { @check }>
+                    <label for="@item.BookID-rating1">1</label>
+                </span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
@@ -89,9 +103,33 @@
                     type: "POST",
                     data: { BookID: BookID, action: action },
                     error: function (response) {
-                        alert(json.stringify(jsonObject));
+                        alert(json.stringify(response));
                     },
                     success: function (response) {
+                        if (response == "Invalid User!") alert("Please Login First!");
+                        console.log(response);
+                    }
+                });
+
+            });
+
+
+            
+            $('.rating').change(function () {
+                var BookID = $(this).attr("name");
+                var Rating = $(this).val();
+
+                //alert(BookID + " >> " + Rating);
+
+                $.ajax({
+                    url: "@Url.Action("Rating")",
+                    type: "POST",
+                    data: { BookID: BookID, Rating: Rating },
+                    error: function (response) {
+                        alert(response);
+                    },
+                    success: function (response) {
+                        alert(response);
                         if (response == "Invalid User!") alert("Please Login First!");
                         console.log(response);
                     }

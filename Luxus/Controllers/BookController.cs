@@ -224,22 +224,44 @@ namespace Luxus.Controllers
 
             return View(bookVM);
         }
+
         [HttpPost]
-        public JsonResult ShareBooks(string BookID,string action)
+        public JsonResult ShareBooks(string BookID, string action)
         {
             string userId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userId))
             {
                 int bookid = Int32.Parse(BookID);
-                Book b = db.Books.Where(x => x.UserID == userId && x.BookID == bookid).FirstOrDefault();
+                Book book = db.Books.Where(x => x.UserID == userId && x.BookID == bookid).FirstOrDefault();
                 if (action == "add")
                 {
-                    b.Shared = true;
+                    book.Shared = true;
                 }
                 else
                 {
-                    b.Shared = false;
+                    book.Shared = false;
                 }
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json("Success");
+            }
+            return Json("Invalid User!");
+        }
+
+        [HttpPost]
+        public JsonResult Rating(string BookID, string Rating)
+        {
+            string userId = User.Identity.GetUserId();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                int bookid = Int32.Parse(BookID);
+                
+                Book book = db.Books.Where(x => x.UserID == userId && x.BookID == bookid).FirstOrDefault();
+                if (!string.IsNullOrEmpty(Rating))
+                {
+                    book.Rating = Int32.Parse(Rating);
+                }
+                db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json("Success");
             }
