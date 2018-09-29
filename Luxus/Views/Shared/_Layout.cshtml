@@ -219,7 +219,7 @@
                     <ul class="list-unstyled navbar__list">
                         <li>
                             <a href="chart.html" id="linkcolor">
-                                @Html.ActionLink("All Books", "MyBooks", null, new { @style= "color: #fff1e5;" }) 
+                                @Html.ActionLink("All Books", "MyBooks","Book", null, new { @style= "color: #fff1e5;" }) 
                             </a>
                         </li>
                         <li class="has-sub">
@@ -228,33 +228,51 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    @Html.ActionLink("Read", "StatusRead", null, new { @style = "color: #fff1e5;" })
+                                    @Html.ActionLink("Read", "StatusRead", "Book", null, new { @style = "color: #fff1e5;" })
                                 </li>
                                 <li>
-                                    @Html.ActionLink("On Going", "StatusOnGoing", null, new { @style = "color: #fff1e5;" })
+                                    @Html.ActionLink("On Going", "StatusOnGoing", "Book", null, new { @style = "color: #fff1e5;" })
                                 </li>
                                 <li>
-                                    @Html.ActionLink("To Read", "StatusToRead", null, new { @style = "color: #fff1e5;" })
+                                    @Html.ActionLink("To Read", "StatusToRead", "Book", null, new { @style = "color: #fff1e5;" })
                                 </li>
                                 
                             </ul>
                         </li>
                         <li>
                             
-                                @Html.ActionLink("Share Your Books", "ShareBooks", null, new { @style = "color: #fff1e5;" })
+                                @Html.ActionLink("Share Your Books", "ShareBooks", "Book", null, new { @style = "color: #fff1e5;" })
                             
                         </li>
                         <li>
                             
-                                @Html.ActionLink("Shared Books", "ShareControls", null, new { @style = "color: #fff1e5;" })
+                                @Html.ActionLink("Shared Books", "ShareControls", "Book", null, new { @style = "color: #fff1e5;" })
                             
+                        </li>
+                        <li>
+                            
+                            @Html.ActionLink("Lent Books", "Index","Rent", null, new { @style = "color: #fff1e5;" })
+
                         </li>
                         
                         
                         <li>
-                            <a href="#" id="linkcolor">
-                               Log Out
-                            </a>
+                         
+
+                            @using Microsoft.AspNet.Identity
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()              
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" style="margin-left:-228px; color: #fff1e5;">Log off</a>
+                                }
+                            }
+                            else
+                            {
+                                
+                            }
+
                         </li>
                         
                         

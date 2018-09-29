@@ -4,11 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+    #BookNew {
+       
+        background-color: #67f79e;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        border: 1px solid;
+        position: center;
+        font-size: 50px;
+        padding-top: 0px;
+    }
+
+</style>
+
+
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <h2 style="text-align:center; margin-top: 0px;">Lend Books</h2>
+        </div>
+    </div> <!-- End ------------------------------------------------------------------------------->
+</header>
+
+
+
+
+
+<br />
+
+
+@if (Model.Count() > 0)
+{
 <table class="table">
     <tr>
         <th>
@@ -23,7 +56,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.StartDate)
@@ -41,26 +75,31 @@
         </td>
     </tr>
 }
+    
+    
 
 </table>
 
 
-<div>
+<div id="BookNew" style="float:left;">
+    @Html.ActionLink("+", "Create")
 
-    @Html.ActionLink("Login with facebook", "Facebook", "Home")
-
-    <table>
-
-        <tr><td>Email:</td><td><b>@TempData["email"]</b></td></tr>
-
-        <tr><td>First Name:</td><td><b>@TempData["first_name"]</b></td></tr>
-
-        <tr><td>Last Name:</td><td><b>@TempData["lastname"]</b></td></tr>
-
-        <tr><td>Picture:</td><td><b><img src="@TempData["picture"]" /></b></td></tr>
-
-
-
-    </table>
 
 </div>
+
+}
+
+else
+{
+
+    <h3>You Dont Have Any Lent Books Yet.</h3>
+
+    <br />
+    <br />
+    <div id="BookNew" style="float:left;">
+        @Html.ActionLink("+", "Create")
+
+
+    </div>
+}
+

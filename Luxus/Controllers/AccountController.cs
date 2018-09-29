@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Luxus.Models;
 using Facebook;
+using System.Data.Entity;
 
 namespace Luxus.Controllers
 {
@@ -330,7 +331,17 @@ namespace Luxus.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
 
+            var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+            var accessToken = identity.FindFirstValue("FacebookAccessToken");
+            dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
+
             
+            string Email = userInfo["email"];
+            string FullName = userInfo["first_name"] + " " + userInfo["last_name"];
+            
+
+
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -339,6 +350,14 @@ namespace Luxus.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            if (result == SignInStatus.Success) {
+                ApplicationDbContext db = new ApplicationDbContext();
+                ApplicationUser user = db.Users.Where(x => x.UserName == Email).FirstOrDefault();
+                user.FullName = FullName;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                
+            }
             switch (result)
             {
                 case SignInStatus.Success:
@@ -489,6 +508,8 @@ namespace Luxus.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+
         #endregion
     }
 }

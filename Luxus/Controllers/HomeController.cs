@@ -132,7 +132,7 @@ namespace Luxus.Controllers
 
             FormsAuthentication.SetAuthCookie(email, false);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyBooks", "Book");
 
         }
 

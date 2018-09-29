@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Luxus.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Luxus.Controllers
 {
@@ -17,7 +18,9 @@ namespace Luxus.Controllers
         // GET: Rent
         public ActionResult Index()
         {
-            return View(db.Rents.ToList());
+            var userID = User.Identity.GetUserId();
+            var rents = db.Rents.Include(b => b.User).Where(x =>x.UserID == userID);
+            return View(rents.ToList());
         }
 
         // GET: Rent/Details/5
@@ -38,7 +41,8 @@ namespace Luxus.Controllers
         // GET: Rent/Create
         public ActionResult Create()
         {
-            ViewBag.BookID = new SelectList(db.Books, "BookID", "Title");
+            string UserId = User.Identity.GetUserId();
+            ViewBag.BookID = new SelectList(db.Books.Where(x => x.UserID == UserId), "BookID", "Title");
             return View();
         }
 

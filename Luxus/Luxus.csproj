@@ -205,14 +205,6 @@
     <Compile Include="Migrations\201809220358240_initial.Designer.cs">
       <DependentUpon>201809220358240_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809220434231_BooksRents.cs" />
-    <Compile Include="Migrations\201809220434231_BooksRents.Designer.cs">
-      <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809220510431_AddAuthor.cs" />
-    <Compile Include="Migrations\201809220510431_AddAuthor.Designer.cs">
-      <DependentUpon>201809220510431_AddAuthor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -542,12 +534,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809220358240_initial.resx">
       <DependentUpon>201809220358240_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809220434231_BooksRents.resx">
-      <DependentUpon>201809220434231_BooksRents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809220510431_AddAuthor.resx">
-      <DependentUpon>201809220510431_AddAuthor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
