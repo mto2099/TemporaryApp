@@ -5,38 +5,126 @@
     string check = "checked";
 }
 
-<h2>ShareBooks</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shared)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageNo)
-        </th>
-        <th></th>
-    </tr>
+<style>
+    #BookContainer {
+        width: 200px;
+        height: 350px;
+        border: 1px solid;
+        display: inline-block;
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 15px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+    }
 
-    @foreach (var item in Model)
+    #BookImg {
+        margin-top: 20px;
+        position: center;
+        width: 50px;
+        height: 50px;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    #BookTitle {
+        text-align: center;
+    }
+
+    #BookAuthor {
+        text-align: center;
+    }
+
+    #BookRating {
+        text-align: center;
+    }
+
+    #BookRating2 {
+        margin-top: -20px;
+    }
+
+    #BookNew {
+        float: right;
+        background-color: #67f79e;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        border: 1px solid;
+        position: center;
+        font-size: 50px;
+        padding-top: 0px;
+    }
+
+    #inlineid {
+        display: inline-block;
+    }
+
+    #inlineid {
+        display: inline-block;
+    }
+</style>
+
+
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <h2 style="text-align:center; margin-top: 0px;">Share Books</h2>
+        </div>
+    </div> <!-- End ------------------------------------------------------------------------------->
+</header>
+
+
+<div style="text-align:center; margin-top: -20px;">
+    @using (Html.BeginForm("Search", "Book", FormMethod.Get))
+    {
+
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+
+    }
+</div>
+<br />
+<br />
+
+
+<div class="row">
+</div>
+
+@foreach (var item in Model)
+            {
+    <div id="BookContainer">
+        <div id="BookImg"> @Html.DisplayFor(model => item.Image) </div><br />
+        <div id="BookTitle">@Html.DisplayFor(model => item.Title)</div><br />
+        <div id="BookRating">
+            <span class="starRating">
+                <input id="@item.BookID-rating5" type="radio" name="@item.BookID" class="rating" value="5" @if (item.Rating == 1) { @check  } disabled>
+
+                <input id="@item.BookID-rating4" type="radio" name="@item.BookID" class="rating" value="4" @if (item.Rating == 2) { @check  } disabled>
+
+                <input id="@item.BookID-rating3" type="radio" name="@item.BookID" class="rating" value="3" @if (item.Rating == 3) { @check  } disabled>
+
+                <input id="@item.BookID-rating2" type="radio" name="@item.BookID" class="rating" value="2" @if (item.Rating == 4) { @check  } disabled>
+
+                <input id="@item.BookID-rating1" type="radio" name="@item.BookID" class="rating" value="1" @if (item.Rating == 5) { @check  } disabled>
+
+            </span>
+        </div>
+        <div id="BookAuthor">@Html.DisplayFor(model => item.Author)</div><br />
+        <div id="BookRating2">@{string checkvalue = (item.Shared) ? "checked" : "";}
+        <input type="checkbox" id="@item.BookID" name="@item.BookID" class="shared" @checkvalue /></div><br />
+        @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+
+
+    </div>
+}
+
+
+    @*@foreach (var item in Model)
     {
         <tr>
             <td>
@@ -71,8 +159,7 @@
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
-                @{string checkvalue = (item.Shared) ? "checked" : "";}
-                <input type="checkbox" id="@item.BookID" name="@item.BookID" class="shared" @checkvalue />
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PageNo)
@@ -82,7 +169,7 @@
         </tr>
     }
 
-</table>
+</table>*@
 
 
 @section Scripts {

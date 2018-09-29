@@ -1,81 +1,260 @@
 ﻿@model IEnumerable<Luxus.Models.Book>
 
 @{
-    ViewBag.Title = "StatusToRead";
+    ViewBag.Title = "MyBooks";
+}
+<style>
+    #BookContainer {
+        width: 200px;
+        height: 300px;
+        border: 1px solid;
+        display: inline-block;
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 15px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+    }
+
+    #BookImg {
+        width: 50px;
+        height: 50px;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    #BookTitle {
+        text-align: center;
+    }
+
+    #BookAuthor {
+        text-align: center;
+    }
+
+    #BookRating {
+        text-align: center;
+    }
+
+    #BookNew {
+        float: right;
+        background-color: #67f79e;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        border: 1px solid;
+        position: center;
+        font-size: 50px;
+        padding-top: 0px;
+    }
+
+    #inlineid {
+        display: inline-block;
+    }
+</style>
+
+
+
+
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="header-wrap">
+                <form class="form-header" action="" method="POST"></form>
+                <div class="header-button">
+
+                </div>
+            </div>
+        </div>
+    </div> <!-- End ------------------------------------------------------------------------------->
+</header>
+
+<h2 style="text-align:center; margin-top: -50px;">All Books</h2>
+<br />
+<br />
+
+<div style="text-align:center; margin-top: -20px;">
+    @using (Html.BeginForm("Search", "Book", FormMethod.Get))
+    {
+
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+
+    }
+</div>
+<br />
+<br />
+
+
+<div class="row">
+</div>
+
+@if (Model != null)
+{
+    <div id="inlineid">
+
+        @foreach (var item in Model)
+        {
+            <div id="BookContainer">
+                <div id="BookImg"> @Html.DisplayFor(model => item.Image) </div><br />
+                <div id="BookTitle">@Html.DisplayFor(model => item.Title)</div><br />
+                <div id="BookAuthor">@Html.DisplayFor(model => item.Author)</div><br />
+                <div id="BookRating">@Html.DisplayFor(model => item.Rating)</div><br />
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+
+
+            </div>
+        }
+    </div>
+
+
 }
 
-<h2>StatusToRead</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.User.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shared)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageNo)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Shared)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageNo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BookID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BookID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BookID })
-        </td>
-    </tr>
+else
+{
+    <h3>Not found !</h3>
 }
 
-</table>
+
+
+
+<div class="row">
+</div>
+<div id="BookNew">
+    @Html.ActionLink("+", "Create")
+
+
+</div>
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shared)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageNo)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desc)
+            </td>
+            <td>
+
+                <form>
+                    <div class="col-md-10">
+                        <div class="form-group">
+
+
+
+                            <input type="radio" id="@item.BookID" name="@item.BookID" value="1" class="ratingb">
+                            <input type="radio" id="@item.BookID" name="@item.BookID" value="2" class="ratingb">
+                            <input type="radio" id="@item.BookID" name="@item.BookID" value="3" class="ratingb">
+                            <input type="radio" id="@item.BookID" name="@item.BookID" value="4" class="ratingb">
+                            <input type="radio" id="@item.BookID" name="@item.BookID" value="5" class="ratingb">
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shared)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageNo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.BookID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.BookID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.BookID })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-1.12.4.js"> </script>
+    <script type="text/javascript">
+ $(function() {
+     $(".ratingb").click(function () {
+         var id = $(this).attr("id");
+         var iid = parseInt(id);
+         var ratingvalue = $('input[name=' + id + ']:checked').val();
+         var iid = parseInt(rratingvalue);
+         alert(typeof (iid));
+         alert(typeof (rratingvalue));
+         //alert(id);
+         //alert(ratingvalue);
+
+            $.ajax({
+                type: "POST",
+                url: "/Book/RatingControl",
+                data: "{ 'BookID': iid, 'Rating' :rratingvalue }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                    if (response != null) {
+                        alert("Name : " + response.Name + ", Designation : " + response.Designation + ", Location :" + response.Location);
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function(response) {
+                    alert(response.responseText);
+                },
+                error: function(response) {
+                    alert(response.responseText);
+                }
+            });
+
+    });
+}); </script>
+}
+

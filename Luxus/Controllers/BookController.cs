@@ -35,24 +35,27 @@ namespace Luxus.Controllers
                                        || (s.Author != null && s.Author.Contains(searchString))).ToList();
             }
 
-            return View("Index", books);
+            return View("MyBooks", books);
         }
 
         public ActionResult StatusRead()
         {
-            var books = db.Books.Include(b => b.User).Where(x => x.Status == 1);
+            var userID = User.Identity.GetUserId();
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 1 && x.UserID == userID);
             return View(books.ToList());
         }
 
         public ActionResult StatusToRead()
         {
-            var books = db.Books.Include(b => b.User).Where(x => x.Status == 2);
+            var userID = User.Identity.GetUserId();
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 3 && x.UserID == userID);
             return View(books.ToList());
         }
 
         public ActionResult StatusOnGoing()
         {
-            var books = db.Books.Include(b => b.User).Where(x => x.Status == 3);
+            var userID = User.Identity.GetUserId();
+            var books = db.Books.Include(b => b.User).Where(x => x.Status == 2 && x.UserID == userID);
             return View(books.ToList());
         }
         // GET: Book/Details/5
@@ -111,7 +114,7 @@ namespace Luxus.Controllers
                 book.UserID = userID;
                 db.Books.Add(book);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyBooks");
             }
 
             //ViewBag.UserID = new SelectList(db.ApplicationUsers, "Id", "FullName", book.UserID);

@@ -17,6 +17,6 @@ namespace Luxus.Models
         public DateTime EndDate { get; set; }
         public string RecipientName { get; set; }
 
-        
+        public virtual ApplicationUser User { get; set; }
     }
 }

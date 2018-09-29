@@ -2,27 +2,124 @@
 
 @{
     ViewBag.Title = "ShareControls";
+    string check = "checked";
 }
 
-<h2>ShareControls</h2>
+<style>
+    #BookContainer {
+        width: 200px;
+        height: 350px;
+        border: 1px solid;
+        display: inline-block;
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 15px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+    }
+
+    #BookImg {
+        margin-top: 20px;
+        position: center;
+        width: 50px;
+        height: 50px;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    #BookTitle {
+        text-align: center;
+    }
+
+    #BookAuthor {
+        text-align: center;
+    }
+
+    #BookRating {
+        text-align: center;
+    }
+
+    #BookRating2 {
+        margin-top: -20px;
+    }
+
+    #BookNew {
+        float: right;
+        background-color: #67f79e;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        border: 1px solid;
+        position: center;
+        font-size: 50px;
+        padding-top: 0px;
+    }
+
+    #inlineid {
+        display: inline-block;
+    }
+
+    #inlineid {
+        display: inline-block;
+    }
+</style>
+
+
+
+
+
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <h2 style="text-align:center; margin-top: 0px;">Shared Books</h2>
+        </div>
+    </div> <!-- End ------------------------------------------------------------------------------->
+</header>
+
+<h2 style="text-align:center; margin-top: -50px;">See What Other Users Have Shared</h2>
+
 
 @foreach (var item in Model) {
 
     if (item.Books.Count > 0)
     {
-    <h2>@item.User.FullName</h2>
-    <table>
-        <tr><th></th></tr>
-
+    <h4>@item.User.FullName</h4>
+   
+        <div>
         @foreach (var book in item.Books)
         {
-            <tr>
-                <td>
-                    @book.Title
-                </td>
-            </tr>
+            <div id="BookContainer">
+                <div id="BookImg"> @Html.DisplayFor(model => book.Image) </div><br />
+                <div id="BookTitle">@Html.DisplayFor(model => book.Title)</div><br />
+                <div id="BookRating">
+                    <span class="starRating">
+                        <input id="@book.BookID-rating5" type="radio" name="@book.BookID" class="rating" value="5" @if (book.Rating == 1) { @check  } disabled>
+
+                        <input id="@book.BookID-rating4" type="radio" name="@book.BookID" class="rating" value="4" @if (book.Rating == 2) { @check  } disabled>
+
+                        <input id="@book.BookID-rating3" type="radio" name="@book.BookID" class="rating" value="3" @if (book.Rating == 3) { @check  } disabled>
+
+                        <input id="@book.BookID-rating2" type="radio" name="@book.BookID" class="rating" value="2" @if (book.Rating == 4) { @check  } disabled>
+
+                        <input id="@book.BookID-rating1" type="radio" name="@book.BookID" class="rating" value="1" @if (book.Rating == 5) { @check  } disabled>
+
+                    </span>
+                </div>
+                <div id="BookAuthor">@Html.DisplayFor(model => book.Author)</div><br />
+                <div id="BookRating2">@Html.DisplayFor(model => book.Rating)</div><br />
+                @Html.ActionLink("Delete", "Delete", new { id = book.BookID })
+
+
+            </div>
         }
-    </table>
-        }
+            </div>
+       
+    
+    }
+    
 
     }

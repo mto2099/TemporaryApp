@@ -2,14 +2,160 @@
 
 @{
     ViewBag.Title = "MyBooks";
+    string check = "checked";
 }
+<style>
 
-<h2>MyBooks</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+    #BookContainer {
+        width: 200px;
+        height: 350px;
+        border: 1px solid;
+        display: inline-block;
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 15px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        
+    }
+
+    #BookImg {
+        margin-top: 20px;
+        position:center;
+        width: 50px;
+        height: 50px;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    #BookTitle {
+        text-align: center;
+    }
+
+    #BookAuthor {
+        text-align: center;
+    }
+
+    #BookRating {
+        text-align: center;
+    }
+
+    #BookRating2{
+        margin-top: -20px;
+    }
+
+    #BookNew {
+        float: right;
+        background-color: #67f79e;
+        text-align: center;
+        
+        width: 75px;
+        height: 75px;
+        -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.75);
+        border: 1px solid;
+        position: center;
+        font-size: 50px;
+        padding-top: 0px;
+    }
+
+    #inlineid {
+        display:inline-block;
+    }
+
+    #inlineid {
+        display:inline-block;
+    }
+
+    </style>
+
+
+
+
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <h2 style="text-align:center; margin-top: 0px;">All Books</h2>
+        </div>
+    </div> <!-- End ------------------------------------------------------------------------------->
+</header>
+
+
+
+
+<div style="text-align:center; margin-top: -20px;"> 
+@using (Html.BeginForm("Search", "Book", FormMethod.Get))
+{
+
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="submit" value="Search" />
+
+}
+</div>
+<br />
+<br />
+
+
+<div class="row">
+    </div>
+
+    @if (Model != null)
+    {
+        <div id="inlineid">
+            
+            @foreach (var item in Model)
+            {
+                <div id="BookContainer">
+                    <div id="BookImg"> @Html.DisplayFor(model => item.Image) </div><br />
+                    <div id="BookTitle">@Html.DisplayFor(model => item.Title)</div><br />
+                    <div id="BookRating"><span class="starRating">
+                        <input id="@item.BookID-rating5" type="radio" name="@item.BookID" class="rating" value="5" @if (item.Rating == 1) { @check } disabled>
+                        
+                        <input id="@item.BookID-rating4" type="radio" name="@item.BookID" class="rating" value="4" @if (item.Rating == 2) { @check } disabled>
+                        
+                        <input id="@item.BookID-rating3" type="radio" name="@item.BookID" class="rating" value="3" @if (item.Rating == 3) { @check } disabled>
+                        
+                        <input id="@item.BookID-rating2" type="radio" name="@item.BookID" class="rating" value="2" @if (item.Rating == 4) { @check } disabled>
+                        
+                        <input id="@item.BookID-rating1" type="radio" name="@item.BookID" class="rating" value="1" @if (item.Rating == 5) { @check } disabled>
+                        
+                    </span></div>
+                    <div id="BookAuthor">@Html.DisplayFor(model => item.Author)</div><br />
+                    <div id="BookRating2">@Html.DisplayFor(model => item.Rating)</div><br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+
+
+                </div>
+            }
+        </div>
+
+
+    }
+
+
+    else
+    {
+        <h3>Not found !</h3>
+    }
+
+
+
+
+<div class="row">
+</div>
+<div id="BookNew">
+    @Html.ActionLink("+","Create")
+   
+
+</div>
+
+@if (Session["RentBookCount"] != null) {
+    <h3>@Session["RentBookCount"]</h3>
+}
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.User.FullName)
@@ -56,16 +202,12 @@
             @Html.DisplayFor(modelItem => item.Desc)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.Rating)*@
+          
             <form>
                 <div class="col-md-10">
                     <div class="form-group">
 
-                        @*@Html.RadioButtonFor(modelItem => item.BookID, "1")
-                    @Html.RadioButtonFor(modelItem => item.BookID, "2")
-                    @Html.RadioButtonFor(modelItem => item.BookID, "3")
-                    @Html.RadioButtonFor(modelItem => item.BookID, "4")
-                    @Html.RadioButtonFor(modelItem => item.BookID, "5")*@
+                        
 
                         <input type="radio" id="@item.BookID" name="@item.BookID" value="1" class="ratingb">
                         <input type="radio" id="@item.BookID" name="@item.BookID" value="2" class="ratingb">
@@ -96,7 +238,7 @@
     </tr>
 }
 
-</table>
+</table>*@
 
 
 @section Scripts {
