@@ -335,13 +335,9 @@ namespace Luxus.Controllers
             var accessToken = identity.FindFirstValue("FacebookAccessToken");
             dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
 
-
             string email = userInfo["email"];
             string fullName = userInfo["first_name"] + " " + userInfo["last_name"];
-
-
-
-
+            
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -388,7 +384,7 @@ namespace Luxus.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -470,7 +466,7 @@ namespace Luxus.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyBooks", "Book");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

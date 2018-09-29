@@ -144,6 +144,8 @@
                     @Html.ActionLink("Register as a new user", "Register", null, new { @style = "padding-left:45px; color:black;" })
                     
                 </p>
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                
                 
             </div>
             <div class="col-md-8 banner-sec">
@@ -154,8 +156,11 @@
                             
                             <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text" style="width:900px;">
-                                        <h2 style="color:brown; padding-left: 80px;">Welcome To Librarium</h2>
-                                    <p style="color:brown; padding-left: 120px;">Please log in or register to continue.</p>
+                                        <h2 style="color:brown; padding-left: 120px;">Welcome To Librarium</h2>
+                                    <p style="color:brown; padding-left: 50px; width:500px; text-align:justify">Librarium is a personal library cataloging application which enables the users to create their own personal libraries. You can sort your own books
+                                        by "Read", "To Read" and "On Going" books. 
+                                        
+                                        You can also set ratings to your books and also share them so that the other users can see what you are reading.</p>
                                 </div>
                             </div>  
                         
@@ -167,7 +172,6 @@
         </div>
     </div>
 </section>
-@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
 }
 
 @section Scripts {

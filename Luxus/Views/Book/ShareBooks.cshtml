@@ -90,7 +90,7 @@
 </div>
 <br />
 <br />
-
+<h3>If You Check the Boxes, your books will be able to be seen by other users in the "Shared Books" page. </h3>
 
 <div class="row">
 </div>
@@ -117,7 +117,7 @@
         <div id="BookAuthor">@Html.DisplayFor(model => item.Author)</div><br />
         <div id="BookRating2">@{string checkvalue = (item.Shared) ? "checked" : "";}
         <input type="checkbox" id="@item.BookID" name="@item.BookID" class="shared" @checkvalue /></div><br />
-        @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+        @*@Html.ActionLink("Delete", "Delete", new { id = item.BookID })*@
 
 
     </div>
