@@ -42,6 +42,7 @@ namespace Luxus.Controllers
         public ActionResult Create()
         {
             string UserId = User.Identity.GetUserId();
+            //ViewBag.BookID = new SelectList(db.Books, "BookID", "Title");
             ViewBag.BookID = new SelectList(db.Books.Where(x => x.UserID == UserId), "BookID", "Title");
             return View();
         }

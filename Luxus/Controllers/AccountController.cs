@@ -335,10 +335,10 @@ namespace Luxus.Controllers
             var accessToken = identity.FindFirstValue("FacebookAccessToken");
             dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
 
-            
-            string Email = userInfo["email"];
-            string FullName = userInfo["first_name"] + " " + userInfo["last_name"];
-            
+
+            string email = userInfo["email"];
+            string fullName = userInfo["first_name"] + " " + userInfo["last_name"];
+
 
 
 
@@ -350,14 +350,7 @@ namespace Luxus.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            if (result == SignInStatus.Success) {
-                ApplicationDbContext db = new ApplicationDbContext();
-                ApplicationUser user = db.Users.Where(x => x.UserName == Email).FirstOrDefault();
-                user.FullName = FullName;
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                
-            }
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -371,7 +364,7 @@ namespace Luxus.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FullName = fullName });
             }
         }
 
