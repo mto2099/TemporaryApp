@@ -64,7 +64,7 @@
         }
         #logoidcolor {
             text-align: center;
-            padding-left: 65px;
+            padding-left: 10px;
             color: #a56935;
         }
 
@@ -211,6 +211,13 @@
                     @*@foreach (var item in Model) {
                     @item.User.FullName
                     }*@
+
+                    @if (Session["RentBookCount"] != null)
+                    {
+                        @Session["RentBookCount"]
+                    }
+
+
                     
                 </a>
             </div>
@@ -251,7 +258,11 @@
                         </li>
                         <li>
                             
-                            @Html.ActionLink("Lent Books", "Index","Rent", null, new { @style = "color: #fff1e5;" })
+                           @Html.ActionLink("Lent Books" , "Index","Rent", null, new { @style = "color: #fff1e5;" })
+
+
+                            
+                            
 
                         </li>
                         

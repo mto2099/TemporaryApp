@@ -2,8 +2,8 @@
 
 @{
     ViewBag.Title = "Create";
-    string check = "checked";
-    string disable = "disable";
+    //string check = "checked";
+    //string disable = "disable";
 }
 
 <h2 style="text-align:center; margin-top: -50px;">Add &nbsp  a  &nbsp Book</h2>
@@ -42,23 +42,24 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-        @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        
         <div class="col-md-10">
-            <span class="starRating">
-                <input id="@Model.BookID-rating5" type="radio" name="@Model.BookID" class="rating" value="5" @if (Model.Rating == 5) { @check  } @if (!ViewBag.EditAccess) { @disable  }>
+            @*<span class="starRating">
+                <input id="@Model.BookID-rating5" type="radio" name="@Model.BookID" class="rating" value="5" >
                 <label for="@Model.BookID-rating5">5</label>
-                <input id="@Model.BookID-rating4" type="radio" name="@Model.BookID" class="rating" value="4" @if (Model.Rating == 4) { @check  } @if (!ViewBag.EditAccess) { @disable  }>
+                <input id="@Model.BookID-rating4" type="radio" name="@Model.BookID" class="rating" value="4">
                 <label for="@Model.BookID-rating4">4</label>
-                <input id="@Model.BookID-rating3" type="radio" name="@Model.BookID" class="rating" value="3" @if (Model.Rating == 3) { @check  } @if (!ViewBag.EditAccess) { @disable  }>
+                <input id="@Model.BookID-rating3" type="radio" name="@Model.BookID" class="rating" value="3" >
                 <label for="@Model.BookID-rating3">3</label>
-                <input id="@Model.BookID-rating2" type="radio" name="@Model.BookID" class="rating" value="2" @if (Model.Rating == 2) { @check  } @if (!ViewBag.EditAccess) { @disable  }>
+                <input id="@Model.BookID-rating2" type="radio" name="@Model.BookID" class="rating" value="2" >
                 <label for="@Model.BookID-rating2">2</label>
-                <input id="@Model.BookID-rating1" type="radio" name="@Model.BookID" class="rating" value="1" @if (Model.Rating == 1) { @check  } @if (!ViewBag.EditAccess) { @disable  }>
+                <input id="@Model.BookID-rating1" type="radio" name="@Model.BookID" class="rating" value="1" >
                 <label for="@Model.BookID-rating1">1</label>
-            </span>
+            </span>*@
         </div>
-    </div>*@
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })

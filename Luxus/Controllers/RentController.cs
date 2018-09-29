@@ -55,7 +55,8 @@ namespace Luxus.Controllers
         {
             if (ModelState.IsValid)
             {
-                var bookid = rent.BookID;
+                string userid = User.Identity.GetUserId();
+                rent.UserID = userid;
                 db.Rents.Add(rent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
